@@ -55,7 +55,7 @@ class Solution{
 	    
 	    for(int i=ind; i<n; i++){
 	        if(i!=ind && a[i]==a[i-1]) continue;
-	        if(a[i]>k) break;
+	        if(a[i]>k) return;
 	        
 	        ans.add(a[i]);
 	        combination(a, n, k-a[i], i+1, ans, res);
