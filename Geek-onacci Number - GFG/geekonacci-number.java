@@ -17,7 +17,6 @@ class GFG {
 		    int n = sc.nextInt();
 		    
 		    System.out.println(onacci(a, b, c, n, 0));
-		    
 		}
 	}
 	
@@ -26,9 +25,6 @@ class GFG {
 	    if(n-4 < 0)  return ans;
 	    
 	    ans = a+b+c;
-	    a = b;
-	    b = c;
-	    c = ans;
-	    return onacci(a, b, c, n-1, ans);
+	    return onacci(b, c, ans, n-1, ans);
 	}
 }
