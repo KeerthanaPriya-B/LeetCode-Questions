@@ -10,11 +10,13 @@
  */
 class Solution {
     public ListNode mergeNodes(ListNode head) {
+        
         ListNode curr= head;
-
 		ListNode dummy = new ListNode(0);
 		ListNode itr = dummy;
-		while(curr!=null){
+        
+		while(curr!=null)
+        {
 			int sum = 0;
 			while(curr!=null && curr.val == 0)
 				curr = curr.next;
@@ -26,7 +28,8 @@ class Solution {
 			if(sum != 0) {
 				ListNode newNode = new ListNode(sum);
 				itr.next = newNode;
-				itr = itr.next; }
+				itr = itr.next; 
+            }
 		}
 		return dummy.next;
     }
