@@ -18,17 +18,21 @@ class MyQueue {
     
     public int pop() {
         //return s1.pop();
-        while(!s1.isEmpty()) s2.push(s1.pop());
+        
+        while(!s1.isEmpty())  s2.push(s1.pop());
         int popped = s2.pop();
-        while(!s2.isEmpty()) s1.push(s2.pop());
+        while(!s2.isEmpty())  s1.push(s2.pop());
+        
         return popped;
     }
     
     public int peek() {
         //return s1.peek();
-        while(!s1.isEmpty()) s2.push(s1.pop());
+        
+        while(!s1.isEmpty())  s2.push(s1.pop());
         int peekEle = s2.peek();
-        while(!s2.isEmpty()) s1.push(s2.pop());
+        while(!s2.isEmpty())  s1.push(s2.pop());
+        
         return peekEle;
     }
     
