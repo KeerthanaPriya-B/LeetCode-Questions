@@ -1,5 +1,6 @@
 class MyStack {
 
+    //solved using single queue
     private Queue<Integer> q;
     
     public MyStack() {
