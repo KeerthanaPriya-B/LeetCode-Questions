@@ -62,8 +62,8 @@ class MyStack
     void push(int a)
 	{
 	    // Your code here
-	    top += 1;
-	    arr[top] = a;
+
+	    arr[++top] = a;
 	} 
 	
     //Function to remove an item from top of the stack.
