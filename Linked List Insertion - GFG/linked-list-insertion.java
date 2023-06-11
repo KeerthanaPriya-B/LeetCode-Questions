@@ -65,12 +65,9 @@ class Solution
     {
         // code here
         Node newnode  = new Node(x);
-        if(head==null){
-            head = newnode;
-        } else{
-            newnode.next = head;
-            head = newnode;
-        }
+        newnode.next = head;
+        head = newnode;
+        
         return head;
     }
     
