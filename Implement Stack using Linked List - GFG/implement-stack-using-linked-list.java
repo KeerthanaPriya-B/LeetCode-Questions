@@ -48,7 +48,7 @@ class MyStack
     //         next = null;
     //     }
     // }   
-    StackNode top = null;
+    StackNode top;
     
     
     //Function to push an integer into the stack.
