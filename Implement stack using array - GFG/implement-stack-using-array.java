@@ -62,7 +62,6 @@ class MyStack
     void push(int a)
 	{
 	    // Your code here
-
 	    arr[++top] = a;
 	} 
 	
@@ -72,6 +71,5 @@ class MyStack
         // Your code here
         if(top==-1) return -1;
         return arr[top--];
-        
 	}
 }
