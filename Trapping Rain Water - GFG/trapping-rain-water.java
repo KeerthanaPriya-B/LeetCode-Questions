@@ -38,24 +38,47 @@ class Solution{
     // arr: input array
     // n: size of array
     // Function to find the trapped water between the blocks.
-    static long trappingWater(int arr[], int n) { 
+    static long trappingWater(int height[], int n) { 
         // Your code here
         
-        int prefix[] = new int[n];
-        int suffix[] = new int[n];
-        prefix[0] = arr[0];
-        for (int i = 1; i < n; i++) {
-            prefix[i] = Math.max(prefix[i - 1], arr[i]);
+        int left = 0, right = n - 1;
+        long res = 0;
+        int maxLeft = 0, maxRight = 0;
+        while (left <= right) {
+            if (height[left] <= height[right]) {
+                if (height[left] >= maxLeft) {
+                    maxLeft = height[left];
+                } else {
+                    res += maxLeft - height[left];
+                }
+                left++;
+            } else {
+                if (height[right] >= maxRight) {
+                    maxRight = height[right];
+                } else {
+                    res += maxRight - height[right];
+                }
+                right--;
+            }
         }
-        suffix[n - 1] = arr[n - 1];
-        for (int i = n - 2; i >= 0; i--) {
-            suffix[i] = Math.max(suffix[i + 1], arr[i]);
-        }
-        long waterTrapped = 0;
-        for (int i = 0; i < n; i++) {
-            waterTrapped += Math.min(prefix[i], suffix[i]) - arr[i];
-        }
-        return waterTrapped;
+        return res;
+        
+        // int left = 0, right = n-1, Lmax = 0, Rmax = 0;
+        // long waterTrapped = 0;
+        
+        // while(left <= right)
+        // {
+        //     if(arr[left] <= arr[right]){
+        //         if(arr[left] >= Lmax) Lmax = arr[left];
+        //         else waterTrapped += Lmax - arr[left];
+        //         left++;
+        //     } else {
+        //         if(arr[right] >= Rmax) Rmax = arr[left];
+        //         else waterTrapped += Rmax - arr[right];
+        //         right++;
+        //     }
+        // }
+        // return waterTrapped;
     } 
 }
 
