@@ -7,11 +7,15 @@ class Solution {
             if(ele>0)
                 s.push(ele);
             else{
-                
+                //stack.peek()-positive case
                 while(!s.isEmpty() && s.peek()>0 && s.peek()<Math.abs(ele))
                     s.pop();
+                
+                //stack.peek()-empty & negative case
                 if(s.isEmpty() || s.peek()<0)
                     s.push(ele);
+                
+                //stack.peek()-equal case
                 else if(!s.isEmpty() && s.peek()==Math.abs(ele))
                     s.pop();
             }
