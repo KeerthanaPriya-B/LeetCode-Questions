@@ -32,11 +32,8 @@ class Solution {
             ans = ans - sum;
         }
         
-        s.clear();
-        //  long M = 1000000007;
-        // Stack<Integer> s = new Stack<>();
-        // long ans = 0;
-        // int n = arr.length;
+        //s.clear();
+        
         
         for(int i=0; i<n; i++){
             while(!s.isEmpty() && arr[i] >= arr[s.peek()]){
@@ -62,8 +59,8 @@ class Solution {
             long noOfSubarr = (idx - lb) * (rb - idx);
             long sum = noOfSubarr * arr[idx];
             ans = ans + sum;
-    }
-        //return (int)ans;
+        }
+       
         return ans;
     }
 }
