@@ -41,22 +41,49 @@ class Solution{
     static long trappingWater(int arr[], int n) { 
         // Your code here
         
-        int left = 0, right = n-1, Lmax = 0, Rmax = 0;
-        long waterTrapped = 0;
+        int lb = arr[0], rb = arr[n-1], left = 1, right = n-2;
+		 long waterAmt = 0, heightOfBlock = 0;
+
+		while(left <= right){
+			if(lb <= rb){
+				heightOfBlock = lb;
+				
+				if(heightOfBlock > arr[left]) 
+					waterAmt += heightOfBlock - arr[left];
+				else
+					lb = Math.max(lb, arr[left]);
+				
+				left++;
+			} 
+			else {
+				heightOfBlock = rb;
+				
+				if(heightOfBlock > arr[right]) 
+					waterAmt += heightOfBlock - arr[right];
+				else
+					rb = Math.max(rb, arr[right]);
+				
+				right--;
+			}
+		}
+	    return waterAmt;
+
+        // int left = 0, right = n-1, Lmax = 0, Rmax = 0;
+        // long waterTrapped = 0;
         
-        while(left <= right)
-        {
-            if(arr[left] <= arr[right]){
-                if(arr[left] >= Lmax) Lmax = arr[left];
-                else waterTrapped += Lmax - arr[left];
-                left++;
-            } else {
-                if(arr[right] >= Rmax) Rmax = arr[right];
-                else waterTrapped += Rmax - arr[right];
-                right--;
-            }
-        }
-        return waterTrapped;
+        // while(left <= right)
+        // {
+        //     if(arr[left] <= arr[right]){
+        //         if(arr[left] >= Lmax) Lmax = arr[left];
+        //         else waterTrapped += Lmax - arr[left];
+        //         left++;
+        //     } else {
+        //         if(arr[right] >= Rmax) Rmax = arr[right];
+        //         else waterTrapped += Rmax - arr[right];
+        //         right--;
+        //     }
+        // }
+        // return waterTrapped;
     } 
 }
 
