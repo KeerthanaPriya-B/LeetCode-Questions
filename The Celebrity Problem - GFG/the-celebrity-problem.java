@@ -41,13 +41,13 @@ class Solution
     	    s.push(i);
     	    
     	while(s.size() > 1){
-    	    int last = s.pop();
-    	    int secondLast = s.pop();
+    	    int p1 = s.pop();
+    	    int p2 = s.pop();
     	    
-    	    if(M[last][secondLast] == 1)
-    	        s.push(secondLast);
+    	    if(M[p1][p2] == 1)
+    	        s.push(p2);
     	    else
-    	        s.push(last);
+    	        s.push(p1);
     	}
     	int celeb = s.pop();
     	for(int i=0; i<n; i++){
