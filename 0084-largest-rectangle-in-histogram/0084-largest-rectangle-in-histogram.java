@@ -1,6 +1,10 @@
 class Solution {
     public int largestRectangleArea(int[] heights) {
         
+        
+        //solved using approach Montonic stack
+		//for doubts- 12th june Stack 2 watch lecture(time 2:15:00)
+        
         int n = heights.length;
         
         Stack<Integer> s = new Stack<>();
