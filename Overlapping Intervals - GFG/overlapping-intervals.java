@@ -39,7 +39,9 @@ class Solution
 {
     public int[][] overlappedInterval(int[][] intervals)
     {
-        // Code here // Code here
+        
+        //TC: O(N logN)  SC: O(N)
+        
         List<int[]> res = new ArrayList<>();
         
         Arrays.sort(intervals, (a,b)-> a[0]-b[0]); 
