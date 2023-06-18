@@ -38,22 +38,20 @@ class Solution
     static boolean ispar(String x)
     {
         // add your code here
-        Stack<Character> stack = new Stack<>();
+        Stack<Character> s = new Stack<>();
         
-        for(char ch: x.toCharArray())
-        {
-            if(ch=='(' || ch=='{' || ch=='[')
-                stack.push(ch);
-            else{
-                if(!stack.isEmpty())
-                {
-                    if(ch==')' && stack.pop()!='(') return false;
-                    if(ch=='}' && stack.pop()!='{') return false;
-                    if(ch==']' && stack.pop()!='[') return false;
-                } 
-                else  return false;
-            }
-        }
-        return stack.isEmpty();
+        for(char ch: x.toCharArray()) {
+            if(ch=='(' || ch=='{' || ch=='[') 
+                s.push(ch);
+            else {
+                if(!s.isEmpty()) {
+                    if(ch==')' && s.pop()!='(') return false;
+                    if(ch=='}' && s.pop()!='{') return false;
+                    if(ch==']' && s.pop()!='[') return false;
+                }
+                else return false;
+            } }
+            
+        return s.isEmpty();
     }
 }
