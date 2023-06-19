@@ -31,38 +31,35 @@ class Solution
     public static long getMaxArea(long hist[], long n) 
     {
         // your code here
-        //solved using approach Montonic stack
-		//for doubts- 12th june Stack 2 watch lecture(time 2:15:00)
-		
-		Stack<Integer> s = new Stack<>();
-		long maxarea = 0;
-		  
-		for(int i=(int)n-1; i>=0; i--)
-		{
-		  while(!s.isEmpty() && hist[i] < hist[s.peek()]){
-			  int lb = i;
-			  int rb = (int)n;
-			  int idx = s.pop();
-			  if(!s.isEmpty())  rb = s.peek();
-		
-			  long width = rb - lb - 1;
-			  long area = width * hist[idx];
-			  maxarea = Math.max(maxarea, area);				  
-		  }
-		  s.push(i);
-		}
-		  
-		while(!s.isEmpty()){
-			int lb = -1;
-			int rb = (int)n;
-			int idx = s.pop();
-			if(!s.isEmpty())  rb = s.peek(); 
-			
-			long width = rb - lb - 1;
-			long area = width * hist[idx];
-			maxarea = Math.max(maxarea, area);	
-		}
-		return maxarea;
+        long maxArea = 0;
+        Stack<Integer> s = new Stack<>();
+        
+        for(int i=0; i<(int)n; i++) {
+            while(!s.isEmpty() &&  hist[s.peek()] > hist[i]) {
+                int idx = s.pop();
+                int rb = i;
+                int lb = -1;
+                if(!s.isEmpty())  lb = s.peek();
+                
+                long width = rb - lb - 1;
+                long area = hist[idx] * width;
+                maxArea = Math.max(maxArea, area);
+            }
+            s.push(i);
+        }
+        while(!s.isEmpty()) {
+            int idx = s.pop();
+            int rb = (int)n;
+            int lb = -1;
+            if(!s.isEmpty())  lb = s.peek();
+            
+            long width = rb - lb - 1;
+            long area = hist[idx] * width;
+            maxArea = Math.max(maxArea, area);
+        }
+        
+        return maxArea;
+        
     }
         
 }
