@@ -47,7 +47,7 @@ class Queues
     //Function to push an element into stack using two queues.
     void push(int a)
     {
-	    // Your code here
+	    // Your code here	
 	    q1.add(a);
     }
     
@@ -55,14 +55,14 @@ class Queues
     int pop()
     {
 	    // Your code here
-	    if(q1.size() == 0) return -1;
+	    if(q1.isEmpty()) return -1;
 	    
-	    while(q1.size() != 1)
+	    while(q1.size() > 1) 
 	        q2.add(q1.remove());
 	        
 	    int popped = q1.remove();
 	    
-	    while(!q2.isEmpty())
+	    while(q2.size() > 0) 
 	        q1.add(q2.remove());
 	        
 	    return popped;
