@@ -64,9 +64,7 @@ class Solution {
         
         Stack<Integer> s = new Stack<>();
         
-        // for(int i=0; i<n; i++) {
-            
-        // }
+        
         int i=0, j=0, ans=0;
         while(true) {
             s.push(ip[i]);
@@ -77,8 +75,8 @@ class Solution {
             }
             i++;
             
-            if(j==n && s.isEmpty()) {ans=1; break;}
-            if(i==n && !s.isEmpty()) {break;}
+            if(j==n && i==n) {ans=1; break;}
+            if(i==n && j!=n) {break;}
         }
         return ans;
         
