@@ -3,6 +3,10 @@ class Solution {
         
         int start = 0, end = A.length;
 
+        //recording: 19th june Binary search 2 time(2:30:00)
+		//TC: O(log n)  SC: O(1)
+        
+        
 		while(start <= end) {
 			int mid = (start+end)/2;
 
