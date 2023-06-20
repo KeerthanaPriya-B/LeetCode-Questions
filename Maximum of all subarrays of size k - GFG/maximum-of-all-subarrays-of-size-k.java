@@ -55,7 +55,11 @@ class Solution
     //Function to find maximum of each subarray of size k.
     static ArrayList <Integer> max_of_subarrays(int arr[], int n, int k)
     {
-        // Your code here
+        
+        //brute force approach - TC: O(N^2) SC: O(k->no.of windows)
+		//refer Striver's DSA sheet written code & explanation for brute force 
+		
+		//refer - 15th june Queue 2 (time 3:00:00)
         
         //TC: O(N)  SC: O(k)
         ArrayList <Integer> res = new ArrayList <>();
