@@ -1,6 +1,10 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] wordArr) {
         
+        
+        //recording: 26th june Hashing 4 time(30:00:00)
+        //TC: O(N*M)  SC: O(N)
+        
         HashMap<String, List<String>> groups = new HashMap<>();
 		List<List<String>> res = new ArrayList<>();
 
