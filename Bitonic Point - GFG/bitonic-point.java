@@ -36,8 +36,11 @@ class Solution {
     int findMaximum(int[] arr, int n) {
         // code here
         
+        //see submissions for another way of writing code
         //recording: 19th june Binary search 2 time(2:30:00)
 		//TC: O(log n)  SC: O(1)
+		
+		//code from scratch utudbe channel
 		
 		int l=0, h=n-1;
 		while(l <= h) {
