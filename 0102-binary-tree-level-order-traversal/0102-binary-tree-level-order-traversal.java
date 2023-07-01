@@ -17,7 +17,7 @@ class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         
         //recording: 29th june binary search 2 time(1:33:00)
-        
+        //TC: O(N)  SC: O(2^H) atmax we can all the nodes of one level(full binary tree)
         List<List<Integer>> res = new ArrayList<>();
         
         if(root == null)
