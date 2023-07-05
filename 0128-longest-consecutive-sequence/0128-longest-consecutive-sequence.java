@@ -19,7 +19,7 @@ class Solution {
             int val = nums[i];
             //finding its next consecutive ele
             while(set.contains(val)) {
-                set.remove(val);
+            //set.remove(val);
                 val++;
             }
             
