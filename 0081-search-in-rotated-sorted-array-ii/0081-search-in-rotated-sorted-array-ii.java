@@ -16,6 +16,7 @@ class Solution {
                 h--;
             }
             //checking whether it lies in the sorted region
+            // '=' in the condition for cases like [3, 1] target = 1
             else if(nums[l] <= nums[mid]) {
                 if(target >= nums[l] && target < nums[mid])
                     h = mid -1;
