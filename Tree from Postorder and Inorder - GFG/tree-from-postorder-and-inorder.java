@@ -69,6 +69,11 @@ class GfG
 	//(Construct func runs for Ntimes & while loop runs for Ntimes-so N^2)
 	//SC: O(H)
 	
+	//isi-Inoreder Starting Index
+	//iei-Inoreder Ending Index
+	//psi-Preoreder Starting Index
+	//pei-Preoreder Ending Index
+	
     Node construct(int in[], int isi, int iei, int post[], int psi, int pei) {
 		if(isi > iei || psi > pei)
 			return null;
