@@ -25,6 +25,11 @@ class Solution {
     }
     
     public TreeNode construct(int in[], int isi, int iei, int post[], int psi, int pei) {
+        //isi-Inoreder Starting Index
+		//iei-Inoreder Ending Index
+		//psi-Preoreder Starting Index
+		//pei-Preoreder Ending Index
+        
 		if(isi > iei || psi > pei)
 			return null;
 
