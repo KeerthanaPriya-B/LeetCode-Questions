@@ -1,6 +1,9 @@
 class Solution {
     public int pivotIndex(int[] nums) {
         
+        
+        //watched video from Techdose Utube Channel
+        
         int n = nums.length;
         if(n == 1)  return 0;
         
