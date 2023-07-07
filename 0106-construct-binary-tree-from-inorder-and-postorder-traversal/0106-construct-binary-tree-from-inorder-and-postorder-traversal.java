@@ -15,6 +15,12 @@
  */
 class Solution {
     public TreeNode buildTree(int[] in, int[] post) {
+        
+        //recording: 2nd june Binary tree 4 time(9:00:00)
+        //TC: O(N^2) - inworst case, assume skew tree
+        //(Construct func runs for Ntimes & while loop runs for Ntimes-so N^2)
+        //SC: O(H)
+        
         return construct(in, 0, in.length-1, post, 0, post.length-1);
     }
     
