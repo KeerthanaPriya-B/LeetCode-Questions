@@ -114,6 +114,7 @@ class Tree {
         // code here.
         
         //lecture : 7th july BST 1 time(2:10:00)
+        //TC: O(H)  SC: O(H)
 		
 		if(root == null)  return null;
 
