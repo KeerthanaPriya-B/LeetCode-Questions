@@ -51,17 +51,17 @@ class Solution {
 				//the replaced node from its original position
 				//to avoid duplicacy
 
-				int minval = min(root.left);
-				root.val = minval;
-				root.left = deleteNode(root.left, minval);
+				int maxval = max(root.left);
+				root.val = maxval;
+				root.left = deleteNode(root.left, maxval);
 			}
 		}
 		return root;
     }
 	
-	public int min(TreeNode root) {
+	public int max(TreeNode root) {
 		if(root.right == null)  return root.val;
-		return min(root.right);
+		return max(root.right);
 	}
 
 }
