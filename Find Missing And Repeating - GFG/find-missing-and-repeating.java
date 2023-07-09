@@ -30,28 +30,34 @@ class GFG {
 // User function Template for Java
 
 class Solve {
-    int[] findTwoElement(int nums[], int n) {
+    int[] findTwoElement(int a[], int N) {
         // code here
-        
-        int[] res = new int[2];
-	
-		Arrays.sort(nums);
-		
-		for(int i=0; i<n-1; i++) {
-			if(nums[i] == nums[i+1]) {
-				res[0] = nums[i];
-				break;
-			}
-		}
-		int originalSum = 0, actualSum = 0;
-		
-		for(int i=0; i<n; i++) {
-			originalSum += (i+1);
-			actualSum += nums[i];
-		}
-		actualSum -= res[0];
-		res[1] = originalSum - actualSum;
-		
-		return res;
+        long n = (long)N;
+        long SN = (n * (n + 1)) / 2;
+        long S2N = (n * (n + 1) * (2 * n + 1)) / 6;
+
+        // Calculate S and S2:
+        long S = 0, S2 = 0;
+        for (int i = 0; i < n; i++) {
+            S += a[i];
+            S2 += (long)a[i] * (long)a[i];
+        }
+
+        //S-Sn = X-Y:
+        long val1 = S - SN;
+
+        // S2-S2n = X^2-Y^2:
+        long val2 = S2 - S2N;
+
+        //Find X+Y = (X^2-Y^2)/(X-Y):
+        val2 = val2 / val1;
+
+        //Find X and Y: X = ((X+Y)+(X-Y))/2 and Y = X-(X-Y),
+        // Here, X-Y = val1 and X+Y = val2:
+        long x = (val1 + val2) / 2;
+        long y = x - val1;
+
+        int[] ans = {(int)x, (int)y};
+        return ans;
     }
 }
