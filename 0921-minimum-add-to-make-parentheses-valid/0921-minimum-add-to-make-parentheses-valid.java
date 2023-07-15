@@ -5,15 +5,12 @@ class Solution {
         
         for(char ch: s.toCharArray())
         {
-            if(ch=='(') 
+            if(ch == '(') 
                 stack.push(ch);
-            else{
-                if(!stack.isEmpty() && stack.peek() == '(') {
-                    //if() 
-                        stack.pop();
-                    //else
-                        //stack.push(ch);
-                } else
+            else {
+                if(!stack.isEmpty() && stack.peek() == '(')
+                    stack.pop();
+                else
                     stack.push(ch);  
             }
         }
