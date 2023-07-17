@@ -1,6 +1,8 @@
 class Solution {
     public String frequencySort(String s) {
         
+        //O(n*logn)
+        
         HashMap<Character, Integer> map = new HashMap<>();
         
         for(char c: s.toCharArray()) 
@@ -14,7 +16,10 @@ class Solution {
         
         StringBuilder sb = new StringBuilder();
         
+        //O(n)
         while(q.size() > 0) {
+            
+            //o(log n)
             char c = q.remove();
             
             int size = map.get(c);
