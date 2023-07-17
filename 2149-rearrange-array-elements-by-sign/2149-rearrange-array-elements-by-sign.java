@@ -1,6 +1,10 @@
 class Solution {
     public int[] rearrangeArray(int[] nums) {
         
+        //Striver's code
+        //if +ve and -ve elements are not equal in length
+        //TC: O(N+N)  SC: O(N)
+        
         int n = nums.length;
         
         int[] res = new int[n];
@@ -33,15 +37,9 @@ class Solution {
         }
         return res;
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+        //if +ve and -ve elements are equal in length
+        //TC: O(N)  SC: O(N)
         
 //         int[] res = new int[nums.length];
 //         int positive = 0, negative = 1;
