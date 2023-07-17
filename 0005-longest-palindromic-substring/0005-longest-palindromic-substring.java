@@ -1,8 +1,11 @@
 class Solution {
     public String longestPalindrome(String s) {
         
+        
         int n = s.length();
-        String LPS = String.valueOf(s.charAt(0));
+        if(n == 1)  return s;
+        
+        String LPS = "";
         
         for(int i=1; i<n; i++) {
             //odd length
