@@ -15,8 +15,8 @@ class Solution {
                 while(!st.isEmpty() && st.pop() != '(')
                     continue;
             }
-            else
-                st.push(c);
+            // else
+            //     st.push(c);
         }
         
         return depth;
