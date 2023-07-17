@@ -37,11 +37,9 @@ class Solution
             
             String str = s.substring(i, j);
             sb.insert(0, "."+str);
-            i = j+1;
             
-            //i++;
+            i = j+1;
         }
         return sb.deleteCharAt(0).toString();
-        //return s;//s.replace(s.charAt(n-1), '\0');
     }
 }
