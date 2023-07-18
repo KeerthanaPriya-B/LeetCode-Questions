@@ -32,40 +32,27 @@ class GFG
 
 class Solution
 {
-    ArrayList<Integer> countDistinct(int arr[], int n, int K)
+    ArrayList<Integer> countDistinct(int A[], int n, int k)
     {
         // code here 
-        HashMap<Integer, Integer> hM = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> map = new HashMap<>();
         ArrayList<Integer> al = new ArrayList<>();
- 
-        // Traverse the first window and store count
-        // of every element in hash map
-        for (int i = 0; i < K; i++)
-            hM.put(arr[i], hM.getOrDefault(arr[i], 0) + 1);
- 
-        // Print count of first window
-        al.add(hM.size());
- 
-        // Traverse through the remaining array
-        for (int i = K; i < arr.length; i++) {
- 
-            // Remove first element of previous window
-            // If there was only one occurrence
-            if (hM.get(arr[i - K]) == 1) {
-                hM.remove(arr[i - K]);
-            }
- 
-            else // reduce count of the removed element
-                hM.put(arr[i - K], hM.get(arr[i - K]) - 1);
- 
-            // Add new element of current window
-            // If this element appears first time,
-            // set its count as 1,
-            hM.put(arr[i], hM.getOrDefault(arr[i], 0) + 1);
- 
-            // Print count of current window
-            al.add(hM.size());
+        
+        for(int i=0; i<k; i++)
+            map.put(A[i], map.getOrDefault(A[i], 0) + 1);
+            
+        al.add(map.size());
+        
+        for(int i=k; i<n; i++) {
+            if(map.get(A[i-k]) == 1)
+                map.remove(A[i-k]);
+            else
+                map.put(A[i-k], map.get(A[i-k]) - 1);
+            
+            map.put(A[i], map.getOrDefault(A[i], 0) + 1);
+            al.add(map.size());
         }
+        
         return al;
     }
 }
