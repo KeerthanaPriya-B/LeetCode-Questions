@@ -73,14 +73,14 @@ class Solution
         for(int i: nums)  set.add(i);
         
         for(int i=0; i<nums.length; i++) {
-            if(!set.contains(nums[i] - 1)) {
-            
+            if(!set.contains(nums[i] - 1)) 
+            {
                 int val = nums[i];
+                
                 while(set.contains(val)) {
                     set.remove(val);
                     val++;
                 }
-   
                 if(val - nums[i] > ans)
                     ans = val - nums[i];
             }
