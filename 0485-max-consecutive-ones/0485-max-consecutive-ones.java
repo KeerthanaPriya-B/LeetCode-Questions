@@ -3,17 +3,15 @@ class Solution {
         
         int n = nums.length;
         int ones = 0;
-        int end = 0;
+        int i = 0;
         int ans = 0;
         
-        while(end < n) {
-            if(nums[end] == 1) ones++;
-            else {
-                
-                ones = 0;
-            }
+        while(i < n) {
+            if(nums[i] == 1) ones++;
+            else  ones = 0;
+
             ans = Math.max(ans, ones);
-            end++;
+            i++;
         }
         return ans;
     }
