@@ -32,14 +32,14 @@ class Solution {
             }
         }
         
-        //traversing through 0th row & marking corresponding col zero
+        //traversing through every rows & marking corresponding col zero
         for(int j=1; j<m; j++) {
             if(mat[0][j] == 0) {
                 for(int i=1; i<n; i++) 
                     mat[i][j] = 0;
             }
         }
-        //traversing through 0th col & marking corresponding row zero
+        //traversing through every cols & marking corresponding row zero
         for(int i=1; i<n; i++) {
             if(mat[i][0] == 0) {
                 for(int j=1; j<m; j++) 
