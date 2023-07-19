@@ -1,16 +1,18 @@
 class Solution {
     public int missingNumber(int[] nums) {
         
-        HashSet<Integer> set = new HashSet<>();
-        
         int n = nums.length;
         
-        for(int ele: nums)  set.add(ele);
+        // Calculate the expected sum of numbers from 0 to n
+        int expectedSum = n * (n + 1) / 2;
         
-        for(int i=0; i<=n; i++) {
-            if(!set.contains(i))
-                return i;
+        // Calculate the actual sum of elements in the array
+        int actualSum = 0;
+        for (int num : nums) {
+            actualSum += num;
         }
-        return -1;
+        
+        // The missing number is the difference between the expected sum and the actual sum
+        return expectedSum - actualSum;
     }
 }
