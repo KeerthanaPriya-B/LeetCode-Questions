@@ -18,13 +18,14 @@ class Solution {
             else cnt--;
         }
         
-        cnt = 0;
-        for(int i=0; i<nums.length; i++) {
-            if(val == nums[i])  cnt++;
-        }
+        // cnt = 0;
+        // for(int i=0; i<nums.length; i++) {
+        //     if(val == nums[i])  cnt++;
+        // }
         
-        if(cnt > times) return val;
-        return -1;
+        //if(cnt > times) 
+        return val;
+        //return -1;
         
         
         
