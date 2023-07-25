@@ -37,25 +37,40 @@ class GFG
 
 class Solution
 {
-    public boolean check(int start, int V, ArrayList<ArrayList<Integer>>adj, int color[]) { 
+    // public boolean check(int start, int V, ArrayList<ArrayList<Integer>>adj, int color[]) { 
         
-        Queue<Integer> q = new LinkedList<>();
-	    q.add(start); 
-	    color[start] = 0;
+    //     Queue<Integer> q = new LinkedList<>();
+	   // q.add(start); 
+	   // color[start] = 0;
 	    
-	    while(!q.isEmpty()) {
-	        int node = q.remove();
+	   // while(!q.isEmpty()) {
+	   //     int node = q.remove();
 	        
-	        for(int neighbour: adj.get(node)) {
-	            if(color[neighbour] == -1) {
-	                q.add(neighbour);
-	                color[neighbour] = 1 - color[node];
-	            }
-	            else if(color[neighbour] == color[node])
-	                return false;
-	        }
-	    }
-	    return true;
+	   //     for(int neighbour: adj.get(node)) {
+	   //         if(color[neighbour] == -1) {
+	   //             q.add(neighbour);
+	   //             color[neighbour] = 1 - color[node];
+	   //         }
+	   //         else if(color[neighbour] == color[node])
+	   //             return false;
+	   //     }
+	   // }
+	   // return true;
+    // }
+    
+    public boolean check(int node, int COLOR, ArrayList<ArrayList<Integer>>adj, int[] color) {
+        
+        color[node] = COLOR;
+        
+        for(int neighbour: adj.get(node)) {
+            if(color[neighbour] == -1) {
+                if(check(neighbour, 1 - COLOR, adj, color) == false)
+                    return false;
+            }
+            else if(color[neighbour] == color[node]) 
+                return false;
+        }
+        return true;
     }
     
     public boolean isBipartite(int V, ArrayList<ArrayList<Integer>>adj)
@@ -66,9 +81,11 @@ class Solution
 	    
 	    for(int i = 0;i<V;i++) {
 	        if(color[i] == -1) {
-	            if(check(i, V, adj, color) == false) {
-	                return false; 
-	            }
+	            if(check(i, 0, adj, color) == false)
+	                return false;
+	           // if(check(i, V, adj, color) == false) {
+	           //     return false; 
+	           // }
 	        }
 	    }
 	    return true;
