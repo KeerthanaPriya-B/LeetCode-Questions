@@ -37,6 +37,7 @@ class GFG
 
 class Solution
 {
+    //******************* BFS ***************************
     // public boolean check(int start, int V, ArrayList<ArrayList<Integer>>adj, int color[]) { 
         
     //     Queue<Integer> q = new LinkedList<>();
@@ -58,6 +59,7 @@ class Solution
 	   // return true;
     // }
     
+    //******************* DFS ***************************
     public boolean check(int node, int COLOR, ArrayList<ArrayList<Integer>>adj, int[] color) {
         
         color[node] = COLOR;
@@ -81,8 +83,10 @@ class Solution
 	    
 	    for(int i = 0;i<V;i++) {
 	        if(color[i] == -1) {
+	            //dfs
 	            if(check(i, 0, adj, color) == false)
 	                return false;
+	           //bfs
 	           // if(check(i, V, adj, color) == false) {
 	           //     return false; 
 	           // }
