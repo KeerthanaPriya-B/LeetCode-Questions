@@ -33,34 +33,92 @@ class DriverClass {
 
 class Solution {
     
-    public boolean dfs(int node, ArrayList<ArrayList<Integer>> adj, int[] vis, int[] pathVis) {
-        vis[node] = 1;
-        pathVis[node] = 1;
-        
-        for(int neighbour: adj.get(node)) {
-            if(vis[neighbour] == 0) {
-                if(dfs(neighbour, adj, vis, pathVis))
-                    return true;
-            }
-            else if(pathVis[neighbour] == 1)
-                return true;
-        }
-        pathVis[node] = 0;
-        return false;
-    }
+    // ******************* pathVis[] & DFS ****************************************
     
-    // Function to detect cycle in a directed graph.
+    // public boolean dfs(int node, ArrayList<ArrayList<Integer>> adj, int[] vis, int[] pathVis) {
+    //     vis[node] = 1;
+    //     pathVis[node] = 1;
+        
+    //     for(int neighbour: adj.get(node)) {
+    //         if(vis[neighbour] == 0) {
+    //             if(dfs(neighbour, adj, vis, pathVis))
+    //                 return true;
+    //         }
+    //         else if(pathVis[neighbour] == 1)
+    //             return true;
+    //     }
+    //     pathVis[node] = 0;
+    //     return false;
+    // }
+    
+    // // Function to detect cycle in a directed graph.
+    // public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj) {
+    //     // code here
+    //     int[] vis = new int[V];
+    //     int[] pathVis = new int[V];
+        
+    //     for(int i=0; i<V; i++) {
+    //         if(vis[i] == 0) {
+    //             if(dfs(i, adj, vis, pathVis) == true)
+    //                 return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+    
+    //*********************** topological sort **********************************
+    
     public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj) {
-        // code here
-        int[] vis = new int[V];
-        int[] pathVis = new int[V];
+    
+        Queue<Integer> q = new ArrayDeque<>();
+        int[] INdegree = new int[V];
+        //int[] topo = new int[V];
         
         for(int i=0; i<V; i++) {
-            if(vis[i] == 0) {
-                if(dfs(i, adj, vis, pathVis) == true)
-                    return true;
+            for(int edge: adj.get(i))
+                INdegree[edge]++;
+        }
+        
+        for(int i=0; i<V; i++) {
+            if(INdegree[i] == 0)
+                q.add(i);
+        }
+        
+        int ind = 0;
+        int cnt = 0;
+        while(!q.isEmpty()) {
+            int node = q.remove();
+            cnt++;
+            //topo[ind++] = node;
+            
+            for(int edge: adj.get(node)) {
+                INdegree[edge]--;
+                if(INdegree[edge] == 0)  q.add(edge);
             }
         }
-        return false;
+        
+        //topological sort is applicable only on Acyclic graph
+        //so, if the cnt is equla to V, which means topo sort is applied succesfully
+        //on the graph - so the graph should be the Acyclic -> return false, else true
+        if(cnt == V) return false;
+        return true;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
