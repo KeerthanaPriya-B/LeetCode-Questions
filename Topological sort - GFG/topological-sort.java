@@ -60,32 +60,66 @@ class Main {
 
 class Solution
 {
-     private static void dfs(int node, int vis[], Stack<Integer> st, ArrayList<ArrayList<Integer>> adj) {
+    //******************** DFS **************************************
+    
+    //  private static void dfs(int node, int vis[], Stack<Integer> st, ArrayList<ArrayList<Integer>> adj) {
         
-        vis[node] = 1;
-        for (int it : adj.get(node)) {
-            if (vis[it] == 0)
-                dfs(it, vis, st, adj);
-        }
-        st.push(node);
-    }
-    //Function to return list containing vertices in Topological order. 
-    static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
-    {
-        // add your code here
-        int vis[] = new int[V];
-        Stack<Integer> st = new Stack<>();
+    //     vis[node] = 1;
+    //     for (int it : adj.get(node)) {
+    //         if (vis[it] == 0)
+    //             dfs(it, vis, st, adj);
+    //     }
+    //     st.push(node);
+    // }
+    // //Function to return list containing vertices in Topological order. 
+    // static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
+    // {
+    //     // add your code here
+    //     int vis[] = new int[V];
+    //     Stack<Integer> st = new Stack<>();
         
-        for (int i = 0; i < V; i++) {
-            if (vis[i] == 0) 
-                dfs(i, vis, st, adj);
-        }
+    //     for (int i = 0; i < V; i++) {
+    //         if (vis[i] == 0) 
+    //             dfs(i, vis, st, adj);
+    //     }
         
-        int[] topo = new int[V];
-        int ind = 0;
-        while(!st.isEmpty()) 
-            topo[ind++] = st.pop();
+    //     int[] topo = new int[V];
+    //     int ind = 0;
+    //     while(!st.isEmpty()) 
+    //         topo[ind++] = st.pop();
             
+    //     return topo;
+    // }
+    
+    //******************** BFS **************************************
+    
+    static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) {
+        
+        Queue<Integer> q = new ArrayDeque<>();
+        int[] INdegree = new int[V];
+        int[] topo = new int[V];
+        
+        for(int i=0; i<V; i++) {
+            for(int edge: adj.get(i))
+                INdegree[edge]++;
+        }
+        
+        for(int i=0; i<V; i++) {
+            if(INdegree[i] == 0)
+                q.add(i);
+        }
+        
+        int ind = 0;
+        while(!q.isEmpty()) {
+            int node = q.remove();
+            topo[ind++] = node;
+            
+            for(int edge: adj.get(node)) {
+                INdegree[edge]--;
+                if(INdegree[edge] == 0)  q.add(edge);
+            }
+        }
         return topo;
     }
+    
 }
