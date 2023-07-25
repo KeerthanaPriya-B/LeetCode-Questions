@@ -97,7 +97,7 @@ class Solution {
             }
         }
         
-        //topological sort is applicable only on Acyclic graph
+        //topological sort is applicable only on directed Acyclic graph
         //so, if the cnt is equla to V, which means topo sort is applied succesfully
         //on the graph - so the graph should be the Acyclic -> return false, else true
         if(cnt == V) return false;
