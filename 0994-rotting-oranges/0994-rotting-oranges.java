@@ -41,7 +41,8 @@ class Solution {
                 if(row>=0 && row<n && col>=0 && col<m && !vis[row][col] && grid[row][col] == 1) {
                     vis[row][col] = true;
                     q.add(new Pair(row, col, pair.time + 1));
-                    t = Math.max(t, pair.time + 1);
+                    //t = Math.max(t, pair.time + 1);
+                    t = pair.time+1;
                     cnt++;
                 }
             }
