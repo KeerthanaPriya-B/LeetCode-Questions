@@ -59,11 +59,15 @@ class Solution {
         
         while(!q.isEmpty()) {
             Pair pair = q.remove();
+            int parent = pair.vertex;
             
-            for(Pair edge: adj.get(pair.vertex)) {
-                if(dis[pair.vertex] + edge.wgt < dis[edge.vertex]) {
-                    dis[edge.vertex] = dis[pair.vertex] + edge.wgt;
-                    q.add(new Pair(edge.vertex, dis[pair.vertex] + edge.wgt));
+            for(Pair edge: adj.get(parent)) {
+                int child = edge.vertex;
+                int wgt = edge.wgt;
+                
+                if(dis[parent] + wgt < dis[child]) {
+                    dis[child] = dis[parent] + wgt;
+                    q.add(new Pair(child, dis[parent] + wgt));
                 }
             }
         }
