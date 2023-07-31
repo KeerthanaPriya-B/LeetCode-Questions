@@ -84,35 +84,30 @@ class GFG {
 
 class Solution
 {
-    private List<Integer> topoSort(int V, List<List<Integer>> adj) {
-        int indegree[] = new int[V];
-        for (int i = 0; i < V; i++) {
-            for (int it : adj.get(i)) {
-                indegree[it]++;
-            }
+    public void dfs(int node, Stack<Integer> s, List<List<Integer>> adj, boolean[] vis) {
+        vis[node] = true;
+        
+        for(int edge: adj.get(node)) {
+            if(!vis[edge])
+                dfs(edge, s, adj, vis);
         }
-
-        Queue<Integer> q = new LinkedList<>();
-        for (int i = 0; i < V; i++) {
-            if (indegree[i] == 0) {
-                q.add(i);
-            }
+        s.push(node);
+    }
+    
+    public String toposort(List<List<Integer>> adj, int n) {
+        Stack<Integer> s = new Stack<>();
+        boolean[] vis = new boolean[n];
+        
+        for(int i=0; i<n; i++) {
+            if(!vis[i]) 
+                dfs(i, s, adj, vis);
         }
-        List<Integer> topo = new ArrayList<>();
-        while (!q.isEmpty()) {
-            int node = q.peek();
-            q.remove();
-            topo.add(node);
-            // node is in your topo sort
-            // so please remove it from the indegree
-
-            for (int it : adj.get(node)) {
-                indegree[it]--;
-                if (indegree[it] == 0) q.add(it);
-            }
-        }
-
-        return topo;
+        
+        StringBuilder sb = new StringBuilder();
+        while(!s.isEmpty()) 
+            sb.append((char)('a' + s.pop()));
+            
+        return sb.toString();
     }
     
     public String findOrder(String [] dict, int N, int K)
@@ -122,27 +117,21 @@ class Solution
         for (int i = 0; i < K; i++) {
             adj.add(new ArrayList<>());
         }
-
-
-        for (int i = 0; i < N - 1; i++) {
+        
+        for(int i=0; i<N-1; i++) {
             String s1 = dict[i];
-            String s2 = dict[i + 1];
+            String s2 = dict[i+1];
+            
             int len = Math.min(s1.length(), s2.length());
-            for (int ptr = 0; ptr < len; ptr++) {
-                if (s1.charAt(ptr) != s2.charAt(ptr)) {
-                    adj.get(s1.charAt(ptr) - 'a').add(s2.charAt(ptr) - 'a');
+            
+            for(int j=0; j<len; j++) {
+                if(s1.charAt(j) != s2.charAt(j)) {
+                    adj.get(s1.charAt(j) - 'a').add(s2.charAt(j) - 'a');
                     break;
                 }
             }
         }
-
-        List<Integer> topo = topoSort(K, adj);
-        String ans = "";
-        for (int it : topo) {
-            ans = ans + (char)(it + (int)('a'));
-        }
-
-        return ans;
         
+        return toposort(adj, K);
     }
 }
