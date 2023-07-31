@@ -99,9 +99,15 @@ class Solution
         int[] INdegree = new int[V];
         int[] topo = new int[V];
         
-        for(int i=0; i<V; i++) {
-            for(int edge: adj.get(i))
-                INdegree[edge]++;
+        // for(int i=0; i<V; i++) {
+        //     for(int edge: adj.get(i))
+        //         INdegree[edge]++;
+        // }
+        for(ArrayList<Integer> edges: adj) {
+            for(int i: edges) {
+                INdegree[i]++;
+            }
+            
         }
         
         for(int i=0; i<V; i++) {
@@ -121,5 +127,39 @@ class Solution
         }
         return topo;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
