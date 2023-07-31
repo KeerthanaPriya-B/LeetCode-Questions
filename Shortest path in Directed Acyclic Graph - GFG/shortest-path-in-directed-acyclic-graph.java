@@ -30,95 +30,47 @@ class Main {
 
 //User function Template for Java
 class Solution {
-
-    class Pair {
-      int first, second;
-      Pair(int _first, int _second) {
-        this.first = _first;
-        this.second = _second;
-      }
+    class Pair{
+        int vertex;
+        int wgt;
+        Pair(int vertex, int wgt) {
+            this.vertex = vertex;
+            this.wgt = wgt;
+        }
     }
 
-    private void topoSort(int node, ArrayList < ArrayList < Pair >> adj, int vis[], Stack < Integer > st) {
-    //This is the function to implement Topological sort. 
-        vis[node] = 1;
-        
-        for (int i = 0; i < adj.get(node).size(); i++) {
-          int v = adj.get(node).get(i).first;
-          if (vis[v] == 0) {
-            topoSort(v, adj, vis, st);
-          }
-        }
-        st.add(node);
-      }
-  
 	public int[] shortestPath(int N,int M, int[][] edges) {
 		//Code here
 		ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+		for(int i=0; i<N; i++) {
+		    adj.add(new ArrayList<Pair>());
+		}
 		
-        for (int i = 0; i < N; i++) {
-          ArrayList<Pair> temp = new ArrayList<>();
-          adj.add(temp);
-        }
-        //We create a graph first in the form of an adjacency list.
-    
-        for (int i = 0; i < M; i++) {
-          int u = edges[i][0];
-          int v = edges[i][1];
-          int wt = edges[i][2];
-          adj.get(u).add(new Pair(v, wt));
-        }
+		for(int i=0; i<M; i++) {
+		    adj.get(edges[i][0]).add(new Pair(edges[i][1], edges[i][2]));
+		}
+		
+		int[] dis = new int[N];
+        for(int i=0; i<N; i++)  dis[i] = Integer.MAX_VALUE;
+        dis[0] = 0;
         
-        Stack<Integer>st = new Stack<>();
-        int vis[] = new int[N];
-        //Now, we perform topo sort using DFS technique 
-        //and store the result in the stack st.
-        for (int i = 0; i < N; i++) {
-          if (vis[i] == 0) 
-            topoSort(i, adj, vis, st);
-        }
+        Queue<Pair> q = new ArrayDeque<>();
+        q.add(new Pair(0, 0));
         
-        //Further, we declare a vector ‘dist’ in which we update the value of the nodes’
-        //distance from the source vertex after relaxation of a particular node.
-        int dist[] = new int[N];
-        for (int i = 0; i < N; i++) 
-            dist[i] = (int)(1e9);
+        while(!q.isEmpty()) {
+            Pair pair = q.remove();
             
-        dist[0] = 0;
-        while (!st.isEmpty()) {
-          int node = st.peek();
-          st.pop();
-    
-          for (int i = 0; i < adj.get(node).size(); i++) {
-            int v = adj.get(node).get(i).first;
-            int wt = adj.get(node).get(i).second;
-    
-            if (dist[node] + wt < dist[v]) 
-              dist[v] = wt + dist[node];
-          }
+            for(Pair edge: adj.get(pair.vertex)) {
+                if(dis[pair.vertex] + edge.wgt < dis[edge.vertex]) {
+                    dis[edge.vertex] = dis[pair.vertex] + edge.wgt;
+                    q.add(new Pair(edge.vertex, dis[pair.vertex] + edge.wgt));
+                }
+            }
         }
         
-        for (int i = 0; i < N; i++) {
-          if (dist[i] == 1e9) dist[i] = -1;
+        for(int i=0; i<N; i++) {
+            if(dis[i] == Integer.MAX_VALUE) dis[i] = -1;
         }
-        return dist;
+        return dis;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
