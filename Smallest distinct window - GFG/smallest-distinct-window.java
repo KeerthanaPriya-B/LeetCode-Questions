@@ -58,8 +58,8 @@ class Solution {
             }
             ei++;
         }
-        int len = ei - si + 1;
-        minlen = Math.min(minlen, len);
+        // int len = ei - si + 1;
+        // minlen = Math.min(minlen, len);
         return minlen;
     }
 }
