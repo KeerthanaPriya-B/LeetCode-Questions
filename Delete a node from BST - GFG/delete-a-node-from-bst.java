@@ -109,56 +109,36 @@ class GfG {
 // User function Template for Java
 
 class Tree {
-    // Function to delete a node from BST.
-    public static Node deleteNode(Node root, int val) {
-        // code here.
-        
-        //lecture : 7th july BST 1 time(2:10:00)
-        //TC: O(H)  SC: O(H)
-		
-		if(root == null)  return null;
-
-		//finding the node that needs to be deleted
-		if(val > root.data) {
-			Node updatedRight = deleteNode(root.right, val);
-			root.right = updatedRight;
-		}
-		else if(val < root.data) {
-			Node updatedLeft = deleteNode(root.left, val);
-			root.left = updatedLeft;
-		}
-		//found a node to be deleted
-		else {
-			//if a node is a leaf node
-			if(root.left == null && root.right == null) {
-				return null;
-			}
-			//if a node has only left child
-			else if(root.left != null && root.right == null) {
-				return root.left;
-			}
-			//if a node has only right child
-			else if(root.left == null && root.right != null) {
-				return root.right;
-			}
-			//if a node has both the children
-			else {
-				//node to be deleted needs to replaced with 
-				//either max node from left subtree or 
-				//min node from right subtree, then delete
-				//the replaced node from its original position
-				//to avoid duplicacy
-
-				int minval = min(root.right);
-				root.data = minval;
-				root.right = deleteNode(root.right, minval);
-			}
-		}
-		return root;
+    public static int max(Node root) {
+        if(root.right == null) return root.data;
+        return max(root.right);
     }
-	
-	public static int min(Node root) {
-		if(root.left == null)  return root.data;
-		return min(root.left);
-	}
+    // Function to delete a node from BST.
+    public static Node deleteNode(Node root, int X) {
+        // code here.
+        if(root == null) return null;
+        
+        if(X < root.data) {
+            Node updatedNode = deleteNode(root.left, X);
+            root.left = updatedNode;
+        }
+        else if(X > root.data) {
+            Node updatedNode = deleteNode(root.right, X);
+            root.right = updatedNode;
+        }
+        else {
+            if(root.left == null && root.right == null)
+                return null;
+            else if(root.left != null && root.right == null)
+                return root.left;
+            else if(root.left == null && root.right != null)
+                return root.right;
+            else {
+                int maxVal = max(root.left);
+                root.data = maxVal;
+                root.left = deleteNode(root.left, maxVal);
+            }
+        }
+        return root;
+    }
 }
