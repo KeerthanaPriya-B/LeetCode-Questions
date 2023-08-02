@@ -89,24 +89,26 @@ class Solution {
     static int characterReplacement(String s, int k) {
         // code here
         int n = s.length();
-        int[] charCount = new int[26];
-        int maxCharCount = 0;
-        int left = 0;
-        int maxSubstringLength = 0;
+        int[] freq = new int[26];
+       
+        int si = 0;
+        int ei = 0;
+        int maxlen = 0;
+        int maxChar = 0;
 
-        for (int right = 0; right < n; right++) {
-            char currentChar = s.charAt(right);
-            charCount[currentChar - 'A']++;
-            maxCharCount = Math.max(maxCharCount, charCount[currentChar - 'A']);
-
-            if (right - left + 1 - maxCharCount > k) {
-                charCount[s.charAt(left) - 'A']--;
-                left++;
+        while(ei < n) {
+            char ch = s.charAt(ei);
+            
+            freq[ch - 'A']++;
+            maxChar = Math.max(maxChar, freq[ch - 'A']);
+            
+            if (ei - si + 1 - maxChar > k) {
+                freq[s.charAt(si) - 'A']--;
+                si++;
             }
-
-            maxSubstringLength = Math.max(maxSubstringLength, right - left + 1);
+            maxlen = Math.max(maxlen, ei-si+1);
+            ei++;
         }
-
-        return maxSubstringLength;
+        return maxlen;
     }
 }
