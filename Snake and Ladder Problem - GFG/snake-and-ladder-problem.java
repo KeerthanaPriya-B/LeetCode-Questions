@@ -26,44 +26,56 @@ class GFG{
 
 // User function Template for Java
 
-class Solution{
-    static int minThrow(int N, int arr[]){
-        // code here
+class Solution {
+    static int minThrow(int N, int[] arr) {
+        // Create a HashMap to store the mapping of snakes and ladders
         Map<Integer, Integer> board = new HashMap<>();
-        for (int i = 0; i < 2 * N; i += 2) {
+        for (int i = 0; i < arr.length; i += 2) {
             board.put(arr[i], arr[i + 1]);
         }
 
-        // Perform BFS to find the shortest path from the source to the destination
-        Queue<Integer> queue = new LinkedList<>();
-        boolean[] visited = new boolean[31];
-        queue.offer(1); // Start from the source cell
-        visited[1] = true;
-        int moves = 0;
+        // Create a Queue for BFS
+        Queue<int[]> queue = new LinkedList<>(); // (current cell, number of throws)
+        queue.offer(new int[]{1, 0});
+
+        // Create a Set to keep track of visited cells
+        Set<Integer> visited = new HashSet<>();
+        visited.add(1);
 
         while (!queue.isEmpty()) {
-            int levelSize = queue.size();
-            for (int i = 0; i < levelSize; i++) {
-                int currentCell = queue.poll();
+            int[] current = queue.poll();
+            int currentCell = current[0];
+            int numThrows = current[1];
 
-                if (currentCell == 30) {
-                    return moves;
+            if (currentCell == 30) {
+                return numThrows;
+            }
+            
+            for (int dice = 1; dice <= 6; dice++) {
+                int nextCell = currentCell + dice;
+                if (board.containsKey(nextCell)) {
+                    nextCell = board.get(nextCell);
                 }
 
-                for (int j = 1; j <= 6; j++) {
-                    int nextCell = currentCell + j;
-                    if (nextCell <= 30 && !visited[nextCell]) {
-                        visited[nextCell] = true;
-                        if (board.containsKey(nextCell)) {
-                            nextCell = board.get(nextCell);
-                        }
-                        queue.offer(nextCell);
-                    }
+                if (nextCell <= 30 && !visited.contains(nextCell)) {
+                    queue.offer(new int[]{nextCell, numThrows + 1});
+                    visited.add(nextCell);
                 }
             }
-            moves++;
         }
 
-        return -1;
+        return -1; // If it is not possible to reach the destination
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
