@@ -43,9 +43,6 @@ class GFG {
 
 // } Driver Code Ends
 
-
-//User function Template for Java
-
 class Solution{
     
     static long countSubarrays(int a[], int n, int L, int R)  
