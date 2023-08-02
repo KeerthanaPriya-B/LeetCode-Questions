@@ -26,9 +26,9 @@ class Solution {
             double prob = curr.getValue();
 
             // Skip if the current probability is smaller than the stored probability for this node
-            if (prob < distances[node]) {
-                continue;
-            }
+            // if (prob < distances[node]) {
+            //     continue;
+            // }
 
             // Explore neighboring nodes
             for (Pair<Integer, Double> edge : graph.get(node)) {
