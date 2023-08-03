@@ -32,40 +32,46 @@ class GFG {
 //User function Template for Java
 
 class Solution {
-    static int numProvinces(ArrayList<ArrayList<Integer>> adj, int V) {
+    static int numProvinces(ArrayList<ArrayList<Integer>> isConnected, int n) {
         // code here
-        ArrayList<ArrayList<Integer>> adjLs = new ArrayList<ArrayList<Integer>>(); 
-        for(int i = 0;i<V;i++) {
-            adjLs.add(new ArrayList<Integer>()); 
-        }
+        List<List<Integer>> adj = new ArrayList<>();
         
-        // to change adjacency matrix to list 
-        for(int i = 0;i<V;i++) {
-            for(int j = 0;j<V;j++) {
-                // self nodes are not considered 
-                if(adj.get(i).get(j) == 1 && i != j) {
-                    adjLs.get(i).add(j); 
-                    adjLs.get(j).add(i); 
+        for(int i=0; i<n; i++) 
+            adj.add(new ArrayList<>());
+        
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<n; j++) {
+                if(i!=j && isConnected.get(i).get(j) == 1) {
+                    adj.get(i).add(j);
+                    adj.get(j).add(i);
                 }
             }
         }
-        int vis[] = new int[V]; 
-        int cnt = 0; 
-        for(int i = 0;i<V;i++) {
-            if(vis[i] == 0) {
-               cnt++;
-               dfs(i, adjLs, vis); 
+        
+        boolean[] vis = new boolean[n];
+        int cnt=0;
+        for(int i=0; i<n; i++) {
+            if(!vis[i]) {
+                cnt++;
+                bfs(i, adj, vis);
             }
         }
         return cnt;
     }
     
-    private static void dfs(int node, ArrayList<ArrayList<Integer>> adjLs, int vis[]) {
+    static void bfs(int n, List<List<Integer>> adj, boolean[] vis) {
+        Queue<Integer> q = new ArrayDeque<>();
+        q.add(n);
+        vis[n] = true;
         
-        vis[node] = 1; 
-        for(Integer it: adjLs.get(node)) {
-            if(vis[it] == 0) 
-                dfs(it, adjLs, vis); 
+        while(!q.isEmpty()) {
+            int node = q.remove();
+            
+            for(int edge: adj.get(node)) {
+                if(!vis[edge]) {
+                    vis[edge] = true;
+                    q.add(edge);}
+            }
         }
     }
 }
