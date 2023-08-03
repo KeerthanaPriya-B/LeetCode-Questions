@@ -68,21 +68,16 @@ class Solution {
         int maxlen = 0;
         
         while(ei < n) {
-            //if(nums[ei] == 1) 
             if(nums[ei] == 0) dk++;
             
             while(dk > k) {
-                int len = ei - si;
-                maxlen = Math.max(maxlen, len);
-                
                 if(nums[si] == 0) dk--;
                 si++;
             }
+            
+            maxlen = Math.max(maxlen, ei-si+1);
             ei++;
         }
-        int len = ei - si;
-        maxlen = Math.max(maxlen, len);
-        
         return maxlen;
     }
 }
