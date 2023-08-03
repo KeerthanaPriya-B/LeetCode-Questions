@@ -1,30 +1,25 @@
 class Solution {
-    public int countAtMostK(int[] nums, int k) {
-        
-        int count = 0;
-        int left = 0;
-        int oddCount = 0;
-
-        for (int right = 0; right < nums.length; right++) {
-            if (nums[right] % 2 == 1) {
-                oddCount++;
-            }
-
-            while (oddCount > k) {
-                if (nums[left] % 2 == 1) {
-                    oddCount--;
-                }
-                left++;
-            }
-
-            // Count the subarrays with at most k odd numbers
-            count += right - left + 1;
-        }
-
-        return count;
-    }
     public int numberOfSubarrays(int[] nums, int k) {
+        return cntsubarr(nums, k) - cntsubarr(nums, k-1);
+    }
+    public int cntsubarr(int[]nums, int k) {
+        int n = nums.length;
+        int si = 0;
+        int ei = 0;
+        int dk = 0;
+        int cnt = 0;
         
-        return countAtMostK(nums, k) - countAtMostK(nums, k - 1);
+        while(ei < n) {
+            if(nums[ei]%2 != 0) dk++;
+            
+            while(dk > k) {
+                if(nums[si]%2 != 0) dk--;
+                si++;
+            }
+            
+            cnt += ei-si+1;
+            ei++;
+        }
+        return cnt;
     }
 }
