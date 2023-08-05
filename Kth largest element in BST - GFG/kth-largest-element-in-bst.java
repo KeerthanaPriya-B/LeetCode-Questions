@@ -117,58 +117,34 @@ class Node
 class Solution
 {
     // return the Kth largest element in the given BST rooted at 'root'
-    public int kthLargest(Node root,int k)
-    {
-        //Your code here
-        Node curr = root;
-        Node Klargest = null;
-     
-        // count variable to keep count of visited Nodes
-        int count = 0;
-     
-        while (curr != null)
-        {
-            // if right child is NULL
-            if (curr.right == null)
-            {
-                // first increment count and check if count = k
-                if (++count == k)
-                    Klargest = curr;
-     
-                // otherwise move to the left child
-                curr = curr.left;
-            }
-     
-            else
-            {
-                // find inorder successor of current Node
-                Node succ = curr.right;
-     
-                while (succ.left != null && succ.left != curr)
-                    succ = succ.left;
-     
-                if (succ.left == null)
-                {
-                    // set left child of successor to the
-                    // current Node
-                    succ.left = curr;
-     
-                    // move current to its right
-                    curr = curr.right;
-                }
-                // restoring the tree back to original binary
-                // search tree removing threaded links
-                else
-                {
-                    succ.left = null;
-                    if (++count == k)
-                        Klargest = curr;
-     
-                    // move current to its left child
-                    curr = curr.left;
-                }
-            }
+    // public int kthLargest(Node root,int K)
+    // {
+    //     //Your code here
+    // }
+    private int count; // Counter to keep track of the nodes visited
+    private int kthLargestElement; // To store the Kth largest element
+
+    public int kthLargest(Node root, int k) {
+        count = 0;
+        kthLargestElement = 0;
+        kthLargestUtil(root, k);
+        return kthLargestElement;
+    }
+
+    private void kthLargestUtil(Node node, int k) {
+        if (node == null)
+            return;
+
+        // Reverse inorder traversal (right, root, left)
+        kthLargestUtil(node.right, k);
+
+        count++;
+        // When count becomes equal to k, we found the Kth largest element
+        if (count == k) {
+            kthLargestElement = node.data;
+            return;
         }
-        return Klargest.data;
+
+        kthLargestUtil(node.left, k);
     }
 }
