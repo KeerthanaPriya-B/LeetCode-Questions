@@ -22,57 +22,46 @@ class GfG {
 // User function Template for Java
 
 class Solution {
-    public int longestkSubstr(String s, int k) {
+    public int longestkSubstr(String S, int k) {
         // code here
-        
-        //recording: 26th june Hashing 4 time(2:40:00)
-		//TC: O(N)  SC: O(26)~O(1)
-
-		//in hashmap if the key is Character i.e alphabets,
-		//SC: O(26) which is approxi O(1)
-		HashMap<Character, Integer> fmap = new HashMap<>();
-
-		int inc = -1;
-		int exc = -1;
-		int maxLen = -1;
-		int n = s.length();
-
-		while(true) {
-			boolean f1 = false;
-			boolean f2 = false;
-
-			//inc
-			if(inc+1 < n && fmap.size() <= k) {
-				inc++;
-				char ch = s.charAt(inc);
-				fmap.put(ch, fmap.getOrDefault(ch, 0) + 1);
-
-				//this is a valid window of k unique char
-				if(fmap.size() == k) {
-					int len = inc - exc;
-					maxLen = Math.max(maxLen, len);
-				}
-				f1 = true;
-			}
-			//exc
-			else if(exc < inc && fmap.size() > k) {
-				exc++;
-				char ch = s.charAt(exc);
-				fmap.put(ch, fmap.get(ch) - 1);
-
-				//removing char if it becomes zero, as it will act as a unique char
-				if(fmap.get(ch) == 0)
-					fmap.remove(ch);
-
-				f2 = true;
-			}
-
-			//when inc & exc both the operation didn't happen, 
-			//we can end the loop
-			if(f1 == false && f2 == false)
-				break;
-		}
-		return maxLen;
+        return cntSubArr(S, k);
     }
-    
+    public int cntSubArr (String S, int k) {
+        int n = S.length();
+        int[] freq = new int[26];
+        
+        int si = 0;
+        int ei = 0;
+        int distinct = 0;
+        int cnt = 0;
+        int maxlen = 0;
+        
+        while(ei < n) {
+            char c = S.charAt(ei);
+            freq[c - 'a']++;
+            
+            //if the char is occured for the 1st time, increase distinct
+            if(freq[c - 'a'] == 1)  distinct++;
+            
+            while(distinct > k) {
+                char ch = S.charAt(si);
+                freq[ch - 'a']--;
+                
+                //if the char is no longer in the freq arr, decrease distinct
+                if(freq[ch - 'a'] == 0)  distinct--;
+                si++;
+            }
+            
+            //update cnt of subArr
+            cnt += ei-si+1;
+            if(distinct == k) {
+                maxlen = Math.max(maxlen, ei-si+1);
+            }
+            
+            //expand window
+            ei++;
+        }
+        if(maxlen == 0) return -1;
+        return maxlen;
+    }
 }
