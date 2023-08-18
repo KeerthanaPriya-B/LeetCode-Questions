@@ -26,6 +26,7 @@ class Solution {
         // code here
         return cntSubArr(S, k);
     }
+    
     public int cntSubArr (String S, int k) {
         int n = S.length();
         int[] freq = new int[26];
@@ -33,7 +34,6 @@ class Solution {
         int si = 0;
         int ei = 0;
         int distinct = 0;
-        int cnt = 0;
         int maxlen = 0;
         
         while(ei < n) {
@@ -52,15 +52,14 @@ class Solution {
                 si++;
             }
             
-            //update cnt of subArr
-            cnt += ei-si+1;
-            if(distinct == k) {
+            //update maxlen
+            if(distinct == k) 
                 maxlen = Math.max(maxlen, ei-si+1);
-            }
             
             //expand window
             ei++;
         }
+        
         if(maxlen == 0) return -1;
         return maxlen;
     }
