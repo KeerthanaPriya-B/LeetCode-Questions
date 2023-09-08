@@ -109,73 +109,56 @@ class GFG
 
 class Solution
 {
-	ArrayList <Integer> boundary(Node node)
-	{
-	    //recording: 29th june binary search 2 time(2:45:00)
-	    //overall complexity - TC: O(N)  SC: O(H)
-	
-        ArrayList<Integer> al = new ArrayList<>();
-        al.add(node.data);
-        
-		LeftBoundary(node.left, al);
-
-		//if we have only one node i.e root node
-		//skip doing BottomBoundary
-		if(node.left == null && node.right == null) {
-			//continue statement won't work in recursion,
-			//so leave it as it is, it is fine
-		}
-		else
-			BottomBoundary(node, al);
-		
-		RightBoundary(node.right, al);
-		return al;
-		
+    Boolean isLeaf(Node root) {
+        return (root.left == null) && (root.right == null);
     }
-	//TC: O(H)  SC: O(H)
-	static void LeftBoundary(Node node, ArrayList<Integer> al ) {
-		//preorder: print node, left, right
-		if(node == null)
-			return;
-
-		if(node.left == null && node.right == null) {}
-			//don't print, since bottom traversal handles this
-			//continue statement won't work in recursion
-		else 
-			al.add(node.data);
-
-		if(node.left != null)
-			LeftBoundary(node.left, al);
-		else
-			LeftBoundary(node.right, al);
-	}
-	//TC: O(N)  SC: O(H)
-	static void BottomBoundary(Node node, ArrayList<Integer> al ) {
-		if(node == null)
-			return;
-
-		if(node.left == null && node.right == null) 
-			al.add(node.data);
-
-		BottomBoundary(node.left, al);
-		BottomBoundary(node.right, al);
-		
-	}
-	//TC: O(H)  SC: O(H)
-	static void RightBoundary(Node node, ArrayList<Integer> al ) {
-		//postOrder: print right, left, node
-		if(node == null)
-			return;
-
-		if(node.right != null)
-			RightBoundary(node.right, al);
-		else
-			RightBoundary(node.left, al);
-
-		if(node.left == null && node.right == null) {}
-			//don't print, since bottom traversal handles this
-			//continue statement won't work in recursion
-		else 
-			al.add(node.data);
+    
+    void leftBoundary(Node node, ArrayList<Integer> res) {
+        Node cur = node.left;
+        
+        while(cur != null) {
+            if(isLeaf(cur) == false)
+                res.add(cur.data);
+            if(cur.left != null) cur = cur.left;
+            else cur = cur.right;
+        }
+    }
+    
+    void leafNodes(Node node, ArrayList<Integer> res) {
+       // if(node == null) return;
+        if(isLeaf(node)) { 
+	        res.add(node.data);
+	        return;
+        }
+	    
+	    if(node.left != null) leafNodes(node.left, res);
+	    if(node.right != null) leafNodes(node.right, res);
+    }
+    
+    void RightBoundary(Node node, ArrayList<Integer> res) {
+        Node cur = node.right;
+        ArrayList<Integer> temp = new ArrayList<>();
+        
+        while(cur != null) {
+            if(isLeaf(cur) == false)
+                temp.add(cur.data);
+            if(cur.right != null) cur = cur.right;
+            else cur = cur.left;
+        }
+        
+        for(int i = temp.size()-1; i>=0; i--)
+            res.add(temp.get(i));
+    }
+    
+	ArrayList<Integer> boundary(Node node)
+	{
+	    ArrayList<Integer> res = new ArrayList<>();
+	    if(isLeaf(node) == false) res.add(node.data);
+	    
+	    leftBoundary(node, res);
+	    leafNodes(node, res);
+	    RightBoundary(node, res);
+	    
+	    return res;
 	}
 }
