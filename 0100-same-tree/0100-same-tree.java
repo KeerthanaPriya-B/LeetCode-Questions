@@ -15,6 +15,8 @@
  */
 class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
+        
+        //can be done using any traversal
         if(p == null || q == null)  return p == q;
         
         boolean LST = isSameTree(p.left, q.left);
