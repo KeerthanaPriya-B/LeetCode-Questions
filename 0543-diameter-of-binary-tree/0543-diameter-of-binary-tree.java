@@ -14,35 +14,23 @@
  * }
  */
 class Solution {
-//     public int diameterOfBinaryTree(TreeNode root) {
+    int maxi = 0;
+    public int diameterOfBinaryTree(TreeNode root) {
+        if(root == null) return 0;
         
-//     }
-    
-    static class Pair {
-		int dia;
-		int height;
-		Pair(int dia, int height) {
-			this.dia = dia;
-			this.height = height;
-		}
-	}
-	public static int diameterOfBinaryTree(TreeNode root) {
-		//write your code here
-		Pair ans = diameter2(root);
-		return ans.dia - 1;	
-	}
-	
-	public static Pair diameter2(TreeNode root) {
-		if(root == null) 
-			return new Pair(0, 0);
-
-		Pair LST = diameter2(root.left);
-		Pair RST = diameter2(root.right);
-		int diaOfRoot = LST.height + 1 + RST.height;
-
-		int diaOfTree = Math.max(diaOfRoot, Math.max(LST.dia, RST.dia));
-		int heightOfTree = Math.max(LST.height, RST.height) + 1;
-		
-		return new Pair(diaOfTree, heightOfTree);
-	}
+        int LHeight = findHeight(root.left);
+        int RHeight = findHeight(root.right);
+        
+        maxi = Math.max(maxi, LHeight + RHeight);
+        
+        diameterOfBinaryTree(root.left);
+        diameterOfBinaryTree(root.right);
+        
+        return maxi;
+    }
+    public int findHeight(TreeNode root) {
+        if(root == null) return 0;
+        
+        return 1 + Math.max(findHeight(root.left), findHeight(root.right));
+    }
 }
